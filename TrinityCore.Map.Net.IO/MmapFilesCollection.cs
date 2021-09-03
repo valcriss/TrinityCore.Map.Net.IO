@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace TrinityCore.Map.Net.IO
@@ -11,6 +12,11 @@ namespace TrinityCore.Map.Net.IO
         public MmapFilesCollection()
         {
             MmapFiles = new List<MmapFile>();
+        }
+
+        public MmapFile GetMap(int mapId)
+        {
+            return MmapFiles.FirstOrDefault(c => c.MapId == mapId);
         }
 
         public static MmapFilesCollection Load(string mmapsDirectory)
