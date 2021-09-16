@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrinityCore.Map.Net.IO.Exceptions;
 using TrinityCore.Map.Net.IO.MmapTile;
 using TrinityCore.Map.Net.IO.Tools;
@@ -71,6 +72,72 @@ namespace TrinityCore.Map.Net.IO
 
             return new MmapTileFile(file, mapId, tileX, tileY);
         }
+
+        public int[] Indices()
+        {
+            List<int> indices = new List<int>();
+            for (int mainIndex = 0; mainIndex < Mesh.Header.PolyCount; mainIndex++)
+            {
+                MmapMeshPoly poly = Mesh.Polys[mainIndex];
+
+                switch (poly.VertCount)
+                {
+
+                    case 3:
+                        indices.Add(poly.Verts[0]);
+                        indices.Add(poly.Verts[1]);
+                        indices.Add(poly.Verts[2]);
+                        break;
+
+                    case 4:
+                        indices.Add(poly.Verts[0]);
+                        indices.Add(poly.Verts[1]);
+                        indices.Add(poly.Verts[2]);
+
+                        indices.Add(poly.Verts[0]);
+                        indices.Add(poly.Verts[2]);
+                        indices.Add(poly.Verts[3]);
+                        break;
+
+                    case 5:
+                        indices.Add(poly.Verts[0]);
+                        indices.Add(poly.Verts[1]);
+                        indices.Add(poly.Verts[2]);
+
+                        indices.Add(poly.Verts[0]);
+                        indices.Add(poly.Verts[2]);
+                        indices.Add(poly.Verts[3]);
+
+                        indices.Add(poly.Verts[4]);
+                        indices.Add(poly.Verts[2]);
+                        indices.Add(poly.Verts[3]);
+                        break;
+
+                    case 6:
+
+                        indices.Add(poly.Verts[0]);
+                        indices.Add(poly.Verts[1]);
+                        indices.Add(poly.Verts[2]);
+
+                        indices.Add(poly.Verts[0]);
+                        indices.Add(poly.Verts[2]);
+                        indices.Add(poly.Verts[3]);
+
+                        indices.Add(poly.Verts[4]);
+                        indices.Add(poly.Verts[2]);
+                        indices.Add(poly.Verts[3]);
+
+                        indices.Add(poly.Verts[5]);
+                        indices.Add(poly.Verts[2]);
+                        indices.Add(poly.Verts[4]);
+
+                        break;
+                }
+            }
+
+            return indices.ToArray();
+        }
+
 
         #endregion Public Methods
 

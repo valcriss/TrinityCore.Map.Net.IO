@@ -78,6 +78,11 @@ namespace TrinityCore.Map.Net.IO
 
         }
 
+        public MmapTileFile GetMmapTileFileFromVector3(float x,float y,float z)
+        {
+            return GetMmapTileFileFromVector3(new Vector3(x, y, z));
+        }
+
         public MmapTileFile GetMmapTileFileFromVector3(Vector3 position)
         {
             int tileX = (int)(32 - position.X / TileWidth);
