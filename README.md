@@ -1,4 +1,4 @@
-# TrinityCore.Map.Net.IO
+# TrinityCore.Map.Net.IO [![.NET](https://github.com/valcriss/TrinityCore.Map.Net.IO/actions/workflows/dotnet.yml/badge.svg)](https://github.com/valcriss/TrinityCore.Map.Net.IO/actions/workflows/dotnet.yml)
 **:warning: Only supported version is TrinityCore branch 3.3.5 :warning:**
 
 _First of all, English is not my mother tongue, so sorry in advance for any mistakes._
