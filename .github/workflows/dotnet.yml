@@ -21,7 +21,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Publish FluentEmail.Core
+    - name: Publish TrinityCore.Map.Net.IO
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
           PROJECT_FILE_PATH: TrinityCore.Map.Net.IO/TrinityCore.Map.Net.IO.csproj
