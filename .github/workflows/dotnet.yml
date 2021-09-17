@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Publish FluentEmail.Core
-      uses: brandedoutcast/publish-nuget@v2.5.2
+      uses: brandedoutcast/publish-nuget@v2.5.5
       with:
           PROJECT_FILE_PATH: TrinityCore.Map.Net.IO/TrinityCore.Map.Net.IO.csproj
           NUGET_KEY: ${{secrets.nugetsAPIKEY}}
