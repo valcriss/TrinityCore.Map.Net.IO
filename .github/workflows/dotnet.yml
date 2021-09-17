@@ -21,5 +21,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Publish
-      run: dotnet nuget push TrinityCore.Map.Net.IO/bin/Debug/TrinityCore.Map.Net.IO.1.0.0.nupkg --api-key ${{secrets.nugetsAPIKEY}}  --source https://api.nuget.org/v3/index.json
+    - name: Publish FluentEmail.Core
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: TrinityCore.Map.Net.IO/TrinityCore.Map.Net.IO.csproj
+          NUGET_KEY: ${{secrets.nugetsAPIKEY}}
