@@ -18,4 +18,7 @@ _Have a nice day_
 - [x] Load mmap files as objects from mmaps directory
 - [x] Get the mtile file for a specific mapId, posX, posY.
 - [x] Read the mtile file details (poly, verts)
+- [x] Can be used to display mmap informations on unity.
+
+![alt text](https://github.com/valcriss/TrinityCore.Map.Net.IO/blob/main/readme/unity.jpg "MMAPS on Unity")
 
