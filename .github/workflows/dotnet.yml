@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Publish
-      run: dotnet nuget push TrinityCore.GameClient.Net.Lib\bin\Debug\TrinityCore.GameClient.Net.Lib.1.0.0.nupkg --api-key ${{secrets.nugetsAPIKEY}}  --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push TrinityCore.Map.Net.IO\bin\Debug\TrinityCore.Map.Net.IO.1.0.0.nupkg --api-key ${{secrets.nugetsAPIKEY}}  --source https://api.nuget.org/v3/index.json

@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Daniel Silvestre</Authors>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\TrinityCore.GameClient.Net.Lib\TrinityCore.GameClient.Net.Lib\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
