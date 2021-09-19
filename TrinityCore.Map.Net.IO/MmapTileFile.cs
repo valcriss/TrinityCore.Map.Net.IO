@@ -12,6 +12,8 @@ namespace TrinityCore.Map.Net.IO
 
         public string File { get; set; }
 
+        public string Key { get; set; }
+
         public MmapTileHeader Header
         {
             get
@@ -53,6 +55,7 @@ namespace TrinityCore.Map.Net.IO
         private MmapTileFile(string file, int mapId, int tileX, int tileY)
         {
             File = file;
+            Key = System.IO.Path.GetFileNameWithoutExtension(file);
             MapId = mapId;
             TileX = tileX;
             TileY = tileY;
