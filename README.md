@@ -22,3 +22,5 @@ _Have a nice day_
 
 ![alt text](https://github.com/valcriss/TrinityCore.Map.Net.IO/blob/main/readme/unity.jpg "MMAPS on Unity")
 
+## How can i install the library ?
+You can install the library by its nuget package : [TrinityCore.Map.Net.IO](https://www.nuget.org/packages/TrinityCore.Map.Net.IO/)
