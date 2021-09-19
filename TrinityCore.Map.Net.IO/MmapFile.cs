@@ -75,7 +75,18 @@ namespace TrinityCore.Map.Net.IO
             }
 
             return list;
+        }
 
+        public string GetMmapTileKeyFromVector3(float x, float y, float z)
+        {
+            return GetMmapTileKeyFromVector3(new Vector3(x, y, z));
+        }
+
+        public string GetMmapTileKeyFromVector3(Vector3 position)
+        {
+            int tileX = (int)(32 - position.X / TileWidth);
+            int tileY = (int)(32 - position.Y / TileHeight);
+            return MapId.ToString("000") + tileX.ToString("00") + tileY.ToString("00");
         }
 
         public MmapTileFile GetMmapTileFileFromVector3(float x,float y,float z)
@@ -85,10 +96,13 @@ namespace TrinityCore.Map.Net.IO
 
         public MmapTileFile GetMmapTileFileFromVector3(Vector3 position)
         {
-            int tileX = (int)(32 - position.X / TileWidth);
-            int tileY = (int)(32 - position.Y / TileHeight);
+            string key = GetMmapTileKeyFromVector3(position);
+            return GetMmapTileFileFromKey(key);
+        }
 
-            string filename = MapId.ToString("000") + tileX.ToString("00") + tileY.ToString("00") + "." + Constants.MMAP_TILE_FILE_EXTENSION;
+        public MmapTileFile GetMmapTileFileFromKey(string key)
+        {
+            string filename = key + "." + Constants.MMAP_TILE_FILE_EXTENSION;
             string file = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(File), filename);
             if (System.IO.File.Exists(file))
             {
