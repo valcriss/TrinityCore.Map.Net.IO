@@ -49,7 +49,7 @@ namespace TrinityCore.Map.Net.IO.MmapTile
             }
             for (int i = 0; i < mesh.Header.PolyCount; i++)
             {
-                mesh.Polys.Add(MmapMeshPoly.LoadBinaryReader(reader));
+                mesh.Polys.Add(MmapMeshPoly.LoadBinaryReader(mesh, reader));
             }
             for (int i = 0; i < mesh.Header.MaxLinkCount; i++)
             {

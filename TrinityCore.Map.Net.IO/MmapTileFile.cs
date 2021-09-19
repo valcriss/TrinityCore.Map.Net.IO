@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
 using TrinityCore.Map.Net.IO.Exceptions;
 using TrinityCore.Map.Net.IO.MmapTile;
 using TrinityCore.Map.Net.IO.Tools;
@@ -76,71 +78,15 @@ namespace TrinityCore.Map.Net.IO
             return new MmapTileFile(file, mapId, tileX, tileY);
         }
 
-        public int[] Indices()
+        public MmapMeshPoly GetNearestPoly(Vector3 position)
         {
-            List<int> indices = new List<int>();
-            for (int mainIndex = 0; mainIndex < Mesh.Header.PolyCount; mainIndex++)
+            MmapMeshPoly poly = Mesh.Polys.FirstOrDefault(c => c.Triangles.Any(d => d.PointInTriangle(position)));
+            if (poly == null)
             {
-                MmapMeshPoly poly = Mesh.Polys[mainIndex];
-
-                switch (poly.VertCount)
-                {
-
-                    case 3:
-                        indices.Add(poly.Verts[0]);
-                        indices.Add(poly.Verts[1]);
-                        indices.Add(poly.Verts[2]);
-                        break;
-
-                    case 4:
-                        indices.Add(poly.Verts[0]);
-                        indices.Add(poly.Verts[1]);
-                        indices.Add(poly.Verts[2]);
-
-                        indices.Add(poly.Verts[0]);
-                        indices.Add(poly.Verts[2]);
-                        indices.Add(poly.Verts[3]);
-                        break;
-
-                    case 5:
-                        indices.Add(poly.Verts[0]);
-                        indices.Add(poly.Verts[1]);
-                        indices.Add(poly.Verts[2]);
-
-                        indices.Add(poly.Verts[0]);
-                        indices.Add(poly.Verts[2]);
-                        indices.Add(poly.Verts[3]);
-
-                        indices.Add(poly.Verts[4]);
-                        indices.Add(poly.Verts[2]);
-                        indices.Add(poly.Verts[3]);
-                        break;
-
-                    case 6:
-
-                        indices.Add(poly.Verts[0]);
-                        indices.Add(poly.Verts[1]);
-                        indices.Add(poly.Verts[2]);
-
-                        indices.Add(poly.Verts[0]);
-                        indices.Add(poly.Verts[2]);
-                        indices.Add(poly.Verts[3]);
-
-                        indices.Add(poly.Verts[4]);
-                        indices.Add(poly.Verts[2]);
-                        indices.Add(poly.Verts[3]);
-
-                        indices.Add(poly.Verts[5]);
-                        indices.Add(poly.Verts[2]);
-                        indices.Add(poly.Verts[4]);
-
-                        break;
-                }
+                poly = Mesh.Polys.OrderBy(c => c.Triangles.Min(d => Vector3.Distance(position, d.Center()))).FirstOrDefault();
             }
-
-            return indices.ToArray();
+            return poly;
         }
-
 
         #endregion Public Methods
 
@@ -204,7 +150,7 @@ namespace TrinityCore.Map.Net.IO
             BinaryReader reader = BinaryReader.FromFile(File);
             _mmapTileHeader = MmapTileHeader.FromBinaryReader(reader);
             _mmapMesh = MmapMesh.FromBinaryReader(reader);
-            if(reader.BytesLeft>0)
+            if (reader.BytesLeft > 0)
             {
                 throw new Exception("Bytes left");
             }

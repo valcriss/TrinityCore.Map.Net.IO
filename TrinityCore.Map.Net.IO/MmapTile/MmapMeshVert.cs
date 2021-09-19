@@ -1,4 +1,5 @@
-﻿using TrinityCore.Map.Net.IO.Tools;
+﻿using System.Numerics;
+using TrinityCore.Map.Net.IO.Tools;
 
 namespace TrinityCore.Map.Net.IO.MmapTile
 {
@@ -9,6 +10,7 @@ namespace TrinityCore.Map.Net.IO.MmapTile
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
+        public Vector3 Vector3 { get; set; }
 
         #endregion Public Properties
 
@@ -20,6 +22,7 @@ namespace TrinityCore.Map.Net.IO.MmapTile
             vert.X = reader.ReadFloat();
             vert.Y = reader.ReadFloat();
             vert.Z = reader.ReadFloat();
+            vert.Vector3 = new Vector3(vert.X, vert.Y, vert.Z);
             return vert;
         }
 

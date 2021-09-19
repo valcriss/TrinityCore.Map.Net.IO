@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TrinityCore.Map.Net.IO.Exceptions;
 
 namespace TrinityCore.Map.Net.IO
 {
@@ -22,6 +23,11 @@ namespace TrinityCore.Map.Net.IO
         public static MmapFilesCollection Load(string mmapsDirectory)
         {
             MmapFilesCollection collection = new MmapFilesCollection();
+
+            if(!System.IO.Directory.Exists(mmapsDirectory) || !System.IO.File.Exists(System.IO.Path.Combine(mmapsDirectory,"000.mmap")))
+            {
+                throw new DirectoryInvalidException();
+            }
 
             foreach(string file in System.IO.Directory.GetFiles(mmapsDirectory,"*."+Constants.MMAP_FILE_EXTENSION))
             {
