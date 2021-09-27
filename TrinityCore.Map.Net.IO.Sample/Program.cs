@@ -12,8 +12,7 @@ namespace TrinityCore.Map.Net.IO.Sample
 
             // Creating the MMAPS File collection
             MmapFilesCollection collection = MmapFilesCollection.Load(mmapsDirectory);
-
-            /*
+          
             DisplayMMAPSFiles(collection);
             Console.WriteLine();
             DisplayMMAPTilesGeneralInformation(collection);
@@ -22,29 +21,12 @@ namespace TrinityCore.Map.Net.IO.Sample
             Console.WriteLine();
             DisplayMMAPTilesMeshInformation(collection);
             Console.WriteLine();
-            */
-            DisplayMap0NearestPoly(collection);
+          
             Console.WriteLine();
 
             AnsiConsole.MarkupLine("[bold springgreen3_1] Process completed[/]");
             Console.ReadKey();
-        }
-
-        private static void DisplayMap0NearestPoly(MmapFilesCollection collection)
-        {
-            AnsiConsole.MarkupLine("[bold springgreen3_1] Map0 Nearest Poly[/]");
-            MmapFile mmap = collection.GetMap(0);
-            MmapTileFile tile = mmap.GetMmapTileFileFromVector3(-8949.95f, -132.493f, 83.5312f);
-            MmapTile.MmapMeshPoly poly = tile.GetNearestPoly(new System.Numerics.Vector3(-8949.95f, -132.493f, 83.5312f));
-            if(poly == null)
-            {
-                AnsiConsole.MarkupLine("[bold red] Unable to find nearest poly[/]");
-            }
-            else
-            {
-                AnsiConsole.MarkupLine("[bold springgreen3_1] Foud poly[/]");
-            }
-        }
+        }        
 
         private static void DisplayMMAPSFiles(MmapFilesCollection collection)
         {
