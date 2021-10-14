@@ -80,6 +80,7 @@ namespace TrinityCore.Map.Net.IO
 
         public MmapMeshPoly GetNearestPoly(Vector3 position)
         {
+            position = position.ToFileFormat();
             MmapMeshPoly poly = Mesh.Polys.FirstOrDefault(c => c.Triangles.Any(d => d.PointInTriangle(position)));
             if (poly == null)
             {

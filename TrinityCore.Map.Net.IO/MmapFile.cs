@@ -102,11 +102,15 @@ namespace TrinityCore.Map.Net.IO
 
         public MmapTileFile GetMmapTileFileFromKey(string key)
         {
+            MmapTileFile fromCache = MmapTileFileCache.Instance.Get(key);
+            if (fromCache != null) return fromCache;
             string filename = key + "." + Constants.MMAP_TILE_FILE_EXTENSION;
             string file = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(File), filename);
             if (System.IO.File.Exists(file))
             {
-                return MmapTileFile.Load(file);
+                MmapTileFile tile = MmapTileFile.Load(file);
+                MmapTileFileCache.Instance.Set(key, tile);
+                return tile;
             }
             return null;
         }

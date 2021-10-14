@@ -1,4 +1,7 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
 using TrinityCore.Map.Net.IO.Tools;
 
 namespace TrinityCore.Map.Net.IO.MmapTile
@@ -15,6 +18,8 @@ namespace TrinityCore.Map.Net.IO.MmapTile
         public ushort[] Verts { get; set; }
         public MmapMeshTriangle[] Triangles { get; set; }
 
+        public string Key => Center().X + "|" + Center().Y + "|" + Center().Z;
+
         #endregion Public Properties
 
         #region Public Fields
@@ -25,6 +30,13 @@ namespace TrinityCore.Map.Net.IO.MmapTile
 
         #region Public Methods
 
+        public Vector3 Center()
+        {
+            float x = Triangles.Sum(c => c.Center().X) / Triangles.Length;
+            float y = Triangles.Sum(c => c.Center().Y) / Triangles.Length;
+            float z = Triangles.Sum(c => c.Center().Z) / Triangles.Length;
+            return new Vector3(x, y, z);
+        }
         public static MmapMeshPoly LoadBinaryReader(MmapMesh mesh, BinaryReader reader)
         {
             MmapMeshPoly poly = new MmapMeshPoly();
@@ -106,6 +118,7 @@ namespace TrinityCore.Map.Net.IO.MmapTile
 
             return poly;
         }
+
 
         #endregion Public Methods
     }

@@ -1,6 +1,9 @@
 ﻿using Spectre.Console;
 using System;
 using System.Globalization;
+using System.Numerics;
+using TrinityCore.Map.Net.IO.MmapTile;
+using TrinityCore.Map.Net.IO.Tools;
 
 namespace TrinityCore.Map.Net.IO.Sample
 {
@@ -12,7 +15,10 @@ namespace TrinityCore.Map.Net.IO.Sample
 
             // Creating the MMAPS File collection
             MmapFilesCollection collection = MmapFilesCollection.Load(mmapsDirectory);
-          
+
+            DisplayClosestTile(collection);
+            Console.WriteLine();
+            /*
             DisplayMMAPSFiles(collection);
             Console.WriteLine();
             DisplayMMAPTilesGeneralInformation(collection);
@@ -21,12 +27,26 @@ namespace TrinityCore.Map.Net.IO.Sample
             Console.WriteLine();
             DisplayMMAPTilesMeshInformation(collection);
             Console.WriteLine();
-          
+          */
             Console.WriteLine();
 
             AnsiConsole.MarkupLine("[bold springgreen3_1] Process completed[/]");
             Console.ReadKey();
-        }        
+        }
+
+        private static void DisplayClosestTile(MmapFilesCollection collection)
+        {
+            AnsiConsole.MarkupLine("[bold springgreen3_1] Closest Tile[/]");
+
+            Vector3 start = new Vector3(-4059.2102f, -13821.921f, 70.808365f);
+            Vector3 end = new Vector3(-4036.181f, -13778.89f, 74.75214f);
+
+            collection.PathFinding.FindPath(530, start, end, 0.01f);
+
+
+
+
+        }
 
         private static void DisplayMMAPSFiles(MmapFilesCollection collection)
         {

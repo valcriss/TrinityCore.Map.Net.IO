@@ -10,9 +10,12 @@ namespace TrinityCore.Map.Net.IO
     {
         public List<MmapFile> MmapFiles { get; set; }
 
+        public PathFinding PathFinding { get; set; }
+
         public MmapFilesCollection()
         {
             MmapFiles = new List<MmapFile>();
+            PathFinding = new PathFinding(this);
         }
 
         public MmapFile GetMap(int mapId)
