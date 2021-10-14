@@ -65,7 +65,7 @@ namespace TrinityCore.Map.Net.IO
 
     public class Path
     {
-        private Point[] Points { get; set; }
+        public Point[] Points { get; set; }
         private int NextPointIndex { get; set; }
 
         public Point CurrentPosition
