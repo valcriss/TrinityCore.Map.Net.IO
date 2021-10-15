@@ -32,36 +32,39 @@ namespace TrinityCore.Map.Net.IO
             MmapMeshPoly endPoly = endTile.GetNearestPoly(end);
             if (endPoly == null) return null;
 
+            Vector3 translatedStart = start.ToFileFormat();
             Vector3 translatedEnd = end.ToFileFormat();
 
             List<MmapMeshPoly> mmapMeshPolies = new List<MmapMeshPoly>() { startPoly };
-            bool complete = false;
+            Queue<List<MmapMeshPoly>> queue = new Queue<List<MmapMeshPoly>>();
+            queue.Enqueue(mmapMeshPolies);
+
             DateTime s = DateTime.Now;
-            List<MmapMeshPoly> polies = startTile.Mesh.Polys.ToArray().ToList();
-            polies.RemoveAll(c => c.Key == startPoly.Key);
-            while (!complete)
+
+            while (queue.Count > 0)
             {
-                MmapMeshPoly last = mmapMeshPolies[mmapMeshPolies.Count - 1];
-                MmapMeshPoly next = polies.OrderBy(c => (c.Center() - last.Center()).Length()).Take(6).ToList().OrderBy(c => (c.Center() - translatedEnd).Length()).FirstOrDefault();
-                polies.RemoveAll(c => c.Key == next.Key);
-                mmapMeshPolies.Add(next);
-                if (next.Key == endPoly.Key)
+                List<MmapMeshPoly> current = queue.Dequeue();
+                MmapMeshPoly last = current[current.Count - 1];
+
+                foreach (MmapMeshPoly poly in last.GetNeighbors(startTile))
                 {
-                    complete = true;
+                    if (poly.Key == endPoly.Key)
+                    {
+                        current.Add(poly);
+                        System.Diagnostics.Debug.WriteLine("Duration :" + (DateTime.Now.Subtract(s).TotalMilliseconds));
+                        return new Path(current.ToPoints(), speed, mapId);
+                    }
+
+                    List<MmapMeshPoly> clone = current.ToArray().ToList();
+                    clone.Add(poly);
+                    queue.Enqueue(clone);
                 }
             }
-            System.Diagnostics.Debug.WriteLine("Duration :" + (DateTime.Now.Subtract(s).TotalMilliseconds));
 
-            List<Point> points = new List<Point>();
-            foreach(MmapMeshPoly poly in mmapMeshPolies)
-            {
-                Vector3 center = poly.Center();
-                points.Add(new Point(center.Z, center.X, center.Y));
-            }
-
-            return new Path(points,speed,mapId);
+            return null;
         }
     }
+
 
     public class Path
     {

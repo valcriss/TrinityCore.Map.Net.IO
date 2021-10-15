@@ -37,15 +37,11 @@ namespace TrinityCore.Map.Net.IO.Sample
         private static void DisplayClosestTile(MmapFilesCollection collection)
         {
             AnsiConsole.MarkupLine("[bold springgreen3_1] Closest Tile[/]");
+            //530 |{ X: -4019,722, Y: -13768,759, Z: 74,678566, O: 5,404263}|{ X: -4020,959, Y: -13774,806, Z: 74,84451, O: 4,559959}|7
+            Vector3 start = new Vector3(-4019.722f, -13768.759f, 74.678566f);
+            Vector3 end = new Vector3(-4020.959f, -13774.806f, 74.84451f);
 
-            Vector3 start = new Vector3(-4059.2102f, -13821.921f, 70.808365f);
-            Vector3 end = new Vector3(-4036.181f, -13778.89f, 74.75214f);
-
-            collection.PathFinding.FindPath(530, start, end, 0.01f);
-
-
-
-
+            Path path = collection.PathFinding.FindPath(530, start, end, 7f);
         }
 
         private static void DisplayMMAPSFiles(MmapFilesCollection collection)

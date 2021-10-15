@@ -10,6 +10,10 @@ namespace TrinityCore.Map.Net.IO.MmapTile
     {
         #region Public Properties
 
+        private const int DT_SALT_BITS = 12;
+        private const int DT_TILE_BITS = 21;
+        private const int DT_POLY_BITS = 31;
+
         public byte AreaAndtype { get; set; }
         public uint FirstLink { get; set; }
         public ushort Flags { get; set; }
@@ -30,13 +34,44 @@ namespace TrinityCore.Map.Net.IO.MmapTile
 
         #region Public Methods
 
+        private Vector3? _center;
+
         public Vector3 Center()
         {
-            float x = Triangles.Sum(c => c.Center().X) / Triangles.Length;
-            float y = Triangles.Sum(c => c.Center().Y) / Triangles.Length;
-            float z = Triangles.Sum(c => c.Center().Z) / Triangles.Length;
-            return new Vector3(x, y, z);
+            if (_center == null)
+            {
+                float x = Triangles.Sum(c => c.Center().X) / Triangles.Length;
+                float y = Triangles.Sum(c => c.Center().Y) / Triangles.Length;
+                float z = Triangles.Sum(c => c.Center().Z) / Triangles.Length;
+                _center = new Vector3(x, y, z);
+            }
+            return _center.Value;
         }
+
+        public List<MmapMeshPoly> GetNeighbors(MmapTileFile tile)
+        {
+            List<MmapMeshPoly> results = new List<MmapMeshPoly>();
+            for (uint i = FirstLink; i != DT_NULL_LINK; i = tile.Mesh.Links[(int)i].Next)
+            {
+                long neighbourRef = tile.Mesh.Links[(int)i].Reference;
+                uint polyIndex = GetPolyRefIndex(neighbourRef);
+                MmapMeshPoly nextPoly = tile.Mesh.Polys[(int)polyIndex];
+                results.Add(nextPoly);
+            }
+            return results;
+        }
+
+        private uint GetPolyRefIndex(long @ref)
+        {
+            uint saltMask = ((uint)1 << DT_SALT_BITS) - 1;
+            uint tileMask = ((uint)1 << DT_TILE_BITS) - 1;
+            uint polyMask = ((uint)1 << DT_POLY_BITS) - 1;
+            uint salt = (uint)((@ref >> (DT_POLY_BITS + DT_TILE_BITS)) & saltMask);
+            uint it = (uint)((@ref >> DT_POLY_BITS) & tileMask);
+            uint ip = (uint)(@ref & polyMask);
+            return ip;
+        }
+
         public static MmapMeshPoly LoadBinaryReader(MmapMesh mesh, BinaryReader reader)
         {
             MmapMeshPoly poly = new MmapMeshPoly();
