@@ -44,13 +44,9 @@ namespace TrinityCore.Map.Net.IO
         internal float? GetHeightAtPosition(Vector3 position)
         {
             position = position.ToFileFormat();
-            MmapMeshPoly poly = Mesh.Polys.FirstOrDefault(c => c.Triangles.Any(d => d.PointInTriangle(position)));
-            if (poly == null)
-            {
-                poly = Mesh.Polys.OrderBy(c => c.Triangles.Min(d => Vector3.Distance(position, d.Center()))).FirstOrDefault();
-                if (poly == null) return null;
-            }
-            return poly.Center().Y;
+            MmapMeshVert vert = Mesh.Verts.OrderBy(c => (c.Vector3 - position).Length()).FirstOrDefault();
+            if (vert == null) return null;
+            return vert.Y;
         }
 
         #endregion Public Properties
