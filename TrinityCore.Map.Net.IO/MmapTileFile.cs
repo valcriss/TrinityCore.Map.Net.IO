@@ -41,6 +41,18 @@ namespace TrinityCore.Map.Net.IO
         public int TileX { get; set; }
         public int TileY { get; set; }
 
+        internal float? GetHeightAtPosition(Vector3 position)
+        {
+            position = position.ToFileFormat();
+            MmapMeshPoly poly = Mesh.Polys.FirstOrDefault(c => c.Triangles.Any(d => d.PointInTriangle(position)));
+            if (poly == null)
+            {
+                poly = Mesh.Polys.OrderBy(c => c.Triangles.Min(d => Vector3.Distance(position, d.Center()))).FirstOrDefault();
+                if (poly == null) return null;
+            }
+            return poly.Center().Y;
+        }
+
         #endregion Public Properties
 
         #region Private Fields
