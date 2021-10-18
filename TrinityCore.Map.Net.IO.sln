@@ -5,9 +5,18 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrinityCore.Map.Net.IO", "TrinityCore.Map.Net.IO\TrinityCore.Map.Net.IO.csproj", "{C5FFD73D-DC06-4867-A1C8-243061D4884F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrinityCore.Map.Net.IO.Sample", "TrinityCore.Map.Net.IO.Sample\TrinityCore.Map.Net.IO.Sample.csproj", "{2BCFBBFE-B53E-4A2A-9B2B-7FC196EF18DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrinityCore.Map.Net.IO.Sample", "TrinityCore.Map.Net.IO.Sample\TrinityCore.Map.Net.IO.Sample.csproj", "{2BCFBBFE-B53E-4A2A-9B2B-7FC196EF18DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrinityCore.Map.Net.IO.Std", "TrinityCore.Map.Net.IO.Std\TrinityCore.Map.Net.IO.Std.csproj", "{F239FCB9-6A06-494C-B9D2-0EECC250FFB6}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TrinityCore.Map.Net.IO.Code", "TrinityCore.Map.Net.IO.Code\TrinityCore.Map.Net.IO.Code.shproj", "{538EC45A-26AC-484F-A33B-7D3197F865AE}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		TrinityCore.Map.Net.IO.Code\TrinityCore.Map.Net.IO.Code.projitems*{538ec45a-26ac-484f-a33b-7d3197f865ae}*SharedItemsImports = 13
+		TrinityCore.Map.Net.IO.Code\TrinityCore.Map.Net.IO.Code.projitems*{c5ffd73d-dc06-4867-a1c8-243061d4884f}*SharedItemsImports = 5
+		TrinityCore.Map.Net.IO.Code\TrinityCore.Map.Net.IO.Code.projitems*{f239fcb9-6a06-494c-b9d2-0eecc250ffb6}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -21,6 +30,10 @@ Global
 		{2BCFBBFE-B53E-4A2A-9B2B-7FC196EF18DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BCFBBFE-B53E-4A2A-9B2B-7FC196EF18DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BCFBBFE-B53E-4A2A-9B2B-7FC196EF18DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F239FCB9-6A06-494C-B9D2-0EECC250FFB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F239FCB9-6A06-494C-B9D2-0EECC250FFB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F239FCB9-6A06-494C-B9D2-0EECC250FFB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F239FCB9-6A06-494C-B9D2-0EECC250FFB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

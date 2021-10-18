@@ -120,8 +120,8 @@ namespace TrinityCore.Map.Net.IO.MmapTile
                     };
                     poly.Triangles[2] = new MmapMeshTriangle()
                     {
-                        Vertices = new ushort[] { poly.Verts[4], poly.Verts[2], poly.Verts[3] },
-                        Points = new Vector3[] { mesh.Verts[poly.Verts[4]].Vector3, mesh.Verts[poly.Verts[2]].Vector3, mesh.Verts[poly.Verts[3]].Vector3 }
+                        Vertices = new ushort[] { poly.Verts[3], poly.Verts[0], poly.Verts[4] },
+                        Points = new Vector3[] { mesh.Verts[poly.Verts[3]].Vector3, mesh.Verts[poly.Verts[0]].Vector3, mesh.Verts[poly.Verts[4]].Vector3 }
                     };
                     break;
                 case 6:
@@ -138,13 +138,13 @@ namespace TrinityCore.Map.Net.IO.MmapTile
                     };
                     poly.Triangles[2] = new MmapMeshTriangle()
                     {
-                        Vertices = new ushort[] { poly.Verts[4], poly.Verts[2], poly.Verts[3] },
-                        Points = new Vector3[] { mesh.Verts[poly.Verts[4]].Vector3, mesh.Verts[poly.Verts[2]].Vector3, mesh.Verts[poly.Verts[3]].Vector3 }
+                        Vertices = new ushort[] { poly.Verts[3], poly.Verts[0], poly.Verts[4] },
+                        Points = new Vector3[] { mesh.Verts[poly.Verts[3]].Vector3, mesh.Verts[poly.Verts[0]].Vector3, mesh.Verts[poly.Verts[4]].Vector3 }
                     };
                     poly.Triangles[3] = new MmapMeshTriangle()
                     {
-                        Vertices = new ushort[] { poly.Verts[5], poly.Verts[2], poly.Verts[4] },
-                        Points = new Vector3[] { mesh.Verts[poly.Verts[5]].Vector3, mesh.Verts[poly.Verts[2]].Vector3, mesh.Verts[poly.Verts[4]].Vector3 }
+                        Vertices = new ushort[] { poly.Verts[5], poly.Verts[0], poly.Verts[4] },
+                        Points = new Vector3[] { mesh.Verts[poly.Verts[5]].Vector3, mesh.Verts[poly.Verts[0]].Vector3, mesh.Verts[poly.Verts[4]].Vector3 }
                     };
                     break;
             }

@@ -19,4 +19,6 @@
     </None>
   </ItemGroup>
 
+  <Import Project="..\TrinityCore.Map.Net.IO.Code\TrinityCore.Map.Net.IO.Code.projitems" Label="Shared" />
+
 </Project>

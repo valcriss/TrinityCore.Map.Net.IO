@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>538ec45a-26ac-484f-a33b-7d3197f865ae</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>TrinityCore.Map.Net.IO.Code</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\DirectoryInvalidException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\FileBadExtensionException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\FileBadFilenamePatternException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\FileBadLengthException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapFilesCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTileFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTileFileCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MMapMesh.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapMeshHeader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapMeshLink.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapMeshNode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapMeshOffMeshConnection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapMeshPoly.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapMeshPolyDetail.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapMeshTriangle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapMeshTriDetail.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapMeshVert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MmapTile\MmapTileHeader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PathFinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Point.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\BinaryReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\MmapMeshPolyExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\Vector3Extensions.cs" />
+  </ItemGroup>
+</Project>
