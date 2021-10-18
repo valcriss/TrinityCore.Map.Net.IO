@@ -16,7 +16,7 @@ namespace TrinityCore.Map.Net.IO
             Collection = collection;
         }
 
-        public Path FindPath(int mapId, Vector3 start, Vector3 end, float speed)
+        public Path FindPath(int mapId, Vector3 start, Vector3 end, float speed, int maxPathLength = 20)
         {
             MmapFile mmap = Collection.GetMap(mapId);
 
@@ -55,6 +55,7 @@ namespace TrinityCore.Map.Net.IO
                         return new Path(current.ToPoints(), speed, mapId);
                     }
 
+                    if (current.Count >= maxPathLength) continue;
                     List<MmapMeshPoly> clone = current.ToArray().ToList();
                     clone.Add(poly);
                     queue.Enqueue(clone);
