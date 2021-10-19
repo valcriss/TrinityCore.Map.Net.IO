@@ -52,7 +52,9 @@ namespace TrinityCore.Map.Net.IO
                     {
                         current.Add(poly);
                         System.Diagnostics.Debug.WriteLine("Duration :" + (DateTime.Now.Subtract(s).TotalMilliseconds));
-                        return new Path(current.ToPoints(), speed, mapId);
+                        List<Point> points = current.ToPoints();
+                        points.Add(new Point(end.X, end.Y, end.Z));
+                        return new Path(points, speed, mapId);
                     }
 
                     done.Add(poly.Key);
