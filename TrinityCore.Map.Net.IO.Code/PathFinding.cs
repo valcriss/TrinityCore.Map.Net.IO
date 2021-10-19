@@ -16,7 +16,7 @@ namespace TrinityCore.Map.Net.IO
             Collection = collection;
         }
 
-        public Path FindPath(int mapId, Vector3 start, Vector3 end, float speed, int maxPathLength = 20)
+        public Path FindPath(int mapId, Vector3 start, Vector3 end, float speed, int maxPathLength = 50)
         {
             MmapFile mmap = Collection.GetMap(mapId);
 
@@ -32,9 +32,7 @@ namespace TrinityCore.Map.Net.IO
             MmapMeshPoly endPoly = endTile.GetNearestPoly(end);
             if (endPoly == null) return null;
 
-            Vector3 translatedStart = start.ToFileFormat();
-            Vector3 translatedEnd = end.ToFileFormat();
-
+            List<string> done = new List<string>();
             List<MmapMeshPoly> mmapMeshPolies = new List<MmapMeshPoly>() { startPoly };
             Queue<List<MmapMeshPoly>> queue = new Queue<List<MmapMeshPoly>>();
             queue.Enqueue(mmapMeshPolies);
@@ -48,12 +46,16 @@ namespace TrinityCore.Map.Net.IO
 
                 foreach (MmapMeshPoly poly in last.GetNeighbors(startTile))
                 {
+                    if (done.Contains(poly.Key)) continue;
+
                     if (poly.Key == endPoly.Key)
                     {
                         current.Add(poly);
                         System.Diagnostics.Debug.WriteLine("Duration :" + (DateTime.Now.Subtract(s).TotalMilliseconds));
                         return new Path(current.ToPoints(), speed, mapId);
                     }
+
+                    done.Add(poly.Key);
 
                     if (current.Count >= maxPathLength) continue;
                     List<MmapMeshPoly> clone = current.ToArray().ToList();
