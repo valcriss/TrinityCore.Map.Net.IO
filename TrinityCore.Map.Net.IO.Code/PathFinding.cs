@@ -44,7 +44,7 @@ namespace TrinityCore.Map.Net.IO
                 List<MmapMeshPoly> current = queue.Dequeue();
                 MmapMeshPoly last = current[current.Count - 1];
 
-                foreach (MmapMeshPoly poly in last.GetNeighbors(startTile).OrderBy(c => c.Center() - end))
+                foreach (MmapMeshPoly poly in last.GetNeighbors(startTile).OrderBy(c => (c.Center() - end).Length()))
                 {
                     if (done.Contains(poly.Key)) continue;
 
